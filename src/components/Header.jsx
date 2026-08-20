@@ -1,7 +1,14 @@
+import React from 'react';
 import { brand } from '../config/brand';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, ShoppingBag, Sparkles } from 'lucide-react';
 
-export default function Header({ activeCategory, onSelectCategory }) {
+export default function Header({ 
+  activeCategory, 
+  onSelectCategory, 
+  quoteCount = 0, 
+  onOpenQuoteDrawer,
+  onOpenQuizModal
+}) {
   const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(
     'Olá! Vim pelo catálogo oficial da SHEEPO® e gostaria de entrar em contato.'
   )}`;
@@ -18,7 +25,7 @@ export default function Header({ activeCategory, onSelectCategory }) {
             🚚 FRETE GRÁTIS PARA JAÚ/SP
           </span>
           <span>✦ DEMAIS REGIÕES: CONSULTAR FRETE NO WHATSAPP</span>
-          <span>✦ 100% PERFUMES ORIGINAIS LACRADOS</span>
+          <span>✦ 100% PERFUMES ORIGINAIS LACRADOS (NÃO TRABALHAMOS COM AMOSTRAS)</span>
           <span>✦ ENCOMENDAS DE QUALQUER PERFUME DO MUNDO</span>
           <span>✦ EM BREVE: MUITAS NOVIDADES</span>
         </div>
@@ -69,8 +76,33 @@ export default function Header({ activeCategory, onSelectCategory }) {
             </a>
           </nav>
 
-          {/* Direct WhatsApp Contact CTA */}
+          {/* Action CTAs */}
           <div className="header-actions">
+            {/* Quiz Trigger */}
+            <button
+              onClick={onOpenQuizModal}
+              className="btn-quiz-header"
+              title="Descubra seu perfume ideal em 3 passos"
+            >
+              <Sparkles size={16} />
+              <span className="hide-mobile">Quiz Olfativo</span>
+            </button>
+
+            {/* Quote Bag Button */}
+            <button
+              onClick={onOpenQuoteDrawer}
+              className="btn-quote-header"
+              title="Ver minha lista de cotação"
+              aria-label="Ver sacola de cotação"
+            >
+              <ShoppingBag size={18} />
+              <span className="hide-mobile">Cotação</span>
+              {quoteCount > 0 && (
+                <span className="header-quote-badge">{quoteCount}</span>
+              )}
+            </button>
+
+            {/* Direct WhatsApp CTA */}
             <a
               href={whatsappUrl}
               target="_blank"
@@ -78,7 +110,7 @@ export default function Header({ activeCategory, onSelectCategory }) {
               className="btn-whatsapp-header"
             >
               <MessageCircle size={17} />
-              <span>Entrar em Contato</span>
+              <span className="hide-mobile">Contato</span>
             </a>
           </div>
         </div>

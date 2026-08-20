@@ -9,7 +9,10 @@ export default function ProductCarousel({
   products, 
   onOpenModal, 
   sectionId,
-  icon: Icon
+  icon: Icon,
+  onToggleQuote,
+  isItemInQuote,
+  onShare
 }) {
   const carouselRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -143,7 +146,13 @@ export default function ProductCarousel({
           >
             {products.map((product) => (
               <div key={product.id} className="carousel-item">
-                <ProductCard product={product} onOpenModal={onOpenModal} />
+                <ProductCard
+                  product={product}
+                  onOpenModal={onOpenModal}
+                  onToggleQuote={onToggleQuote}
+                  isInQuote={isItemInQuote ? isItemInQuote(product.id) : false}
+                  onShare={onShare}
+                />
               </div>
             ))}
           </div>

@@ -1,8 +1,10 @@
+import React from 'react';
 import { brand } from '../config/brand';
-import { MessageCircle, Eye, Sparkles, Crown, Flower2 } from 'lucide-react';
+import { MessageCircle, Eye, Crown, Flower2, Share2, Plus, Check } from 'lucide-react';
 
-export default function ProductCard({ product, onOpenModal }) {
-  const whatsappMessage = `Olá! Gostaria de consultar o valor e a disponibilidade do perfume ${product.name} (${product.brand}) na SHEEPO®.`;
+export default function ProductCard({ product, onOpenModal, onToggleQuote, isInQuote, onShare }) {
+  const imageUrl = `${window.location.origin}${product.image}`;
+  const whatsappMessage = `Olá! Gostaria de consultar o valor e a disponibilidade do perfume ${product.name} (${product.brand} - Frasco Lacrado) na SHEEPO®.\n\n${imageUrl}`;
   const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
@@ -15,7 +17,7 @@ export default function ProductCard({ product, onOpenModal }) {
           </span>
         )}
         <span className="pill-badge pill-badge--available">
-          Disponível
+          Frasco Lacrado
         </span>
       </div>
 
@@ -31,6 +33,19 @@ export default function ProductCard({ product, onOpenModal }) {
           className="product-card__img"
           loading="lazy"
         />
+        
+        {/* Quick share button on top right of image */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            if (onShare) onShare(product);
+          }}
+          className="btn-card-quick-share"
+          title="Compartilhar perfume"
+          aria-label="Compartilhar perfume"
+        >
+          <Share2 size={14} />
+        </button>
       </div>
 
       {/* Content */}
@@ -40,7 +55,9 @@ export default function ProductCard({ product, onOpenModal }) {
           <span className="product-card__volume">{product.volume}</span>
         </div>
 
-        <h3 className="product-card__title">{product.name}</h3>
+        <h3 className="product-card__title" onClick={() => onOpenModal(product)}>
+          {product.name}
+        </h3>
 
         <p className="product-card__tagline">
           {product.tagline}
@@ -62,15 +79,28 @@ export default function ProductCard({ product, onOpenModal }) {
             target="_blank"
             rel="noopener noreferrer"
             className="btn-consultar-card"
+            title="Consultar no WhatsApp"
           >
             <MessageCircle size={15} />
-            <span>Consultar Valor</span>
+            <span>Consultar</span>
           </a>
+
+          {onToggleQuote && (
+            <button
+              onClick={() => onToggleQuote(product)}
+              className={`btn-quote-toggle ${isInQuote ? 'active' : ''}`}
+              title={isInQuote ? "Remover da lista de cotação" : "Adicionar à lista de cotação"}
+              aria-label="Adicionar à cotação"
+            >
+              {isInQuote ? <Check size={16} /> : <Plus size={16} />}
+            </button>
+          )}
 
           <button
             onClick={() => onOpenModal(product)}
             className="btn-details-card"
-            title="Ver pirâmide olfativa e detalhes"
+            title="Ver pirâmide olfativa e detalhes completos"
+            aria-label="Ver detalhes"
           >
             <Eye size={17} />
           </button>

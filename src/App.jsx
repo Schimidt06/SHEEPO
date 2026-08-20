@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { products, categories } from './data/products';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -9,12 +9,109 @@ import CustomOrderBanner from './components/CustomOrderBanner';
 import TrustSection from './components/TrustSection';
 import UpcomingSection from './components/UpcomingSection';
 import Footer from './components/Footer';
-import { Search, Sparkles, PackageOpen, Crown, Flower2 } from 'lucide-react';
+import QuoteDrawer from './components/QuoteDrawer';
+import FragranceQuizModal from './components/FragranceQuizModal';
+import { Search, Sparkles, PackageOpen, Crown, Flower2, ShoppingBag, CheckCircle, Share2, Sparkle } from 'lucide-react';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeModalProduct, setActiveModalProduct] = useState(null);
+  
+  // Quote Bag State with LocalStorage
+  const [quoteItems, setQuoteItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem('sheepo_quote_items');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [isQuoteDrawerOpen, setIsQuoteDrawerOpen] = useState(false);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
+
+  // Sync Quote with LocalStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('sheepo_quote_items', JSON.stringify(quoteItems));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [quoteItems]);
+
+  // Toast auto dismiss
+  useEffect(() => {
+    if (!toastMessage) return;
+    const timer = setTimeout(() => {
+      setToastMessage(null);
+    }, 3200);
+    return () => clearTimeout(timer);
+  }, [toastMessage]);
+
+  const showToast = (msg) => {
+    setToastMessage(msg);
+  };
+
+  const handleToggleQuote = (product) => {
+    setQuoteItems(prev => {
+      const exists = prev.some(item => item.id === product.id);
+      if (exists) {
+        showToast(`Removido da cotação: ${product.name}`);
+        return prev.filter(item => item.id !== product.id);
+      } else {
+        showToast(`Adicionado à cotação: ${product.name}`);
+        return [...prev, product];
+      }
+    });
+  };
+
+  const handleRemoveQuoteItem = (productId) => {
+    setQuoteItems(prev => prev.filter(item => item.id !== productId));
+  };
+
+  const handleClearQuote = () => {
+    setQuoteItems([]);
+    showToast('Lista de cotação limpa.');
+  };
+
+  const isItemInQuote = (productId) => {
+    return quoteItems.some(item => item.id === productId);
+  };
+
+  // Share functionality (Web Share API with fallback)
+  const handleShare = async (product) => {
+    const shareData = {
+      title: `${product.name} - SHEEPO®`,
+      text: `Confira o perfume ${product.name} (${product.brand}) na curadoria oficial da SHEEPO®:`,
+      url: window.location.href
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          copyToClipboard(window.location.href, product.name);
+        }
+      }
+    } else {
+      copyToClipboard(window.location.href, product.name);
+    }
+  };
+
+  const copyToClipboard = (text, productName) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`Link de "${productName}" copiado para a área de transferência!`);
+      }).catch(() => {
+        showToast(`Link copiado com sucesso!`);
+      });
+    } else {
+      showToast(`Link copiado com sucesso!`);
+    }
+  };
 
   // Masculine and Feminine separated collections (exactly 10 each)
   const masculinos = useMemo(() => {
@@ -65,7 +162,10 @@ function App() {
       {/* Header */}
       <Header 
         activeCategory={selectedCategory} 
-        onSelectCategory={handleSelectCategory} 
+        onSelectCategory={handleSelectCategory}
+        quoteCount={quoteItems.length}
+        onOpenQuoteDrawer={() => setIsQuoteDrawerOpen(true)}
+        onOpenQuizModal={() => setIsQuizOpen(true)}
       />
 
       <main style={{ maxWidth: '100%', overflowX: 'hidden' }}>
@@ -103,17 +203,30 @@ function App() {
               })}
             </div>
 
-            {/* Search Input */}
-            <div className="search-box-wrap">
-              <Search size={16} className="search-icon-pos" />
-              <input
-                type="text"
-                placeholder="Buscar por perfume, nota (ex: Baunilha, Oud) ou marca..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="search-input"
-                aria-label="Buscar perfume"
-              />
+            {/* Actions / Search */}
+            <div className="search-and-quiz-wrap">
+              {/* Quiz Trigger in Catalog Bar */}
+              <button
+                onClick={() => setIsQuizOpen(true)}
+                className="btn-quiz-catalog"
+                title="Não sabe qual escolher? Faça o quiz!"
+              >
+                <Sparkles size={16} />
+                <span>Quiz Olfativo</span>
+              </button>
+
+              {/* Search Input */}
+              <div className="search-box-wrap">
+                <Search size={16} className="search-icon-pos" />
+                <input
+                  type="text"
+                  placeholder="Buscar perfume, marca ou nota (ex: Baunilha, Couro)..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="search-input"
+                  aria-label="Buscar perfume"
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -141,6 +254,9 @@ function App() {
                     key={product.id}
                     product={product}
                     onOpenModal={(prod) => setActiveModalProduct(prod)}
+                    onToggleQuote={handleToggleQuote}
+                    isInQuote={isItemInQuote(product.id)}
+                    onShare={handleShare}
                   />
                 ))}
               </div>
@@ -167,7 +283,7 @@ function App() {
                     Limpar Busca
                   </button>
                   <a
-                    href={`https://wa.me/5514997070804?text=${encodeURIComponent(`Olá! Procuro pelo perfume ${searchQuery} na SHEEPO®.`)}`}
+                    href={`https://wa.me/5514997070804?text=${encodeURIComponent(`Olá! Procuro pelo perfume ${searchQuery} (Frasco Lacrado) na SHEEPO®.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-whatsapp-header"
@@ -185,9 +301,12 @@ function App() {
             icon={Crown}
             eyebrow="SELEÇÃO OFICIAL 2026"
             title="Os 10 Melhores Perfumes Árabes Masculinos"
-            subtitle="As 10 fragrâncias masculinas mais elogiadas, marcantes e de alta performance à pronta-entrega."
+            subtitle="As 10 fragrâncias masculinas mais elogiadas, marcantes e de alta performance à pronta-entrega. Frascos lacrados de fábrica."
             products={masculinos}
             onOpenModal={(prod) => setActiveModalProduct(prod)}
+            onToggleQuote={handleToggleQuote}
+            isItemInQuote={isItemInQuote}
+            onShare={handleShare}
           />
         ) : selectedCategory === 'top-feminino' ? (
           /* Only Feminine Top 10 View */
@@ -196,21 +315,27 @@ function App() {
             icon={Flower2}
             eyebrow="SELEÇÃO OFICIAL 2026"
             title="Os 10 Melhores Perfumes Árabes Femininos"
-            subtitle="As 10 fragrâncias femininas mais elegantes, doces, cremosas e sofisticadas da perfumaria árabe."
+            subtitle="As 10 fragrâncias femininas mais elegantes, doces, cremosas e sofisticadas da perfumaria árabe. Frascos lacrados de fábrica."
             products={femininos}
             onOpenModal={(prod) => setActiveModalProduct(prod)}
+            onToggleQuote={handleToggleQuote}
+            isItemInQuote={isItemInQuote}
+            onShare={handleShare}
           />
         ) : (
-          /* "All" Category View: Clean Organised Carousels for both Top 10 Collections */
+          /* "All" Category View: Both Top 10 Collections */
           <>
             <ProductCarousel
               sectionId="masculinos"
               icon={Crown}
               eyebrow="SELEÇÃO OFICIAL 2026"
               title="Os 10 Melhores Perfumes Árabes Masculinos"
-              subtitle="As fragrâncias masculinas mais elogiadas, versáteis e potentes para noites, encontros e dia a dia."
+              subtitle="As fragrâncias masculinas mais elogiadas, versáteis e potentes para noites, encontros e dia a dia. Frascos 100% lacrados."
               products={masculinos}
               onOpenModal={(prod) => setActiveModalProduct(prod)}
+              onToggleQuote={handleToggleQuote}
+              isItemInQuote={isItemInQuote}
+              onShare={handleShare}
             />
 
             <ProductCarousel
@@ -218,9 +343,12 @@ function App() {
               icon={Flower2}
               eyebrow="SELEÇÃO OFICIAL 2026"
               title="Os 10 Melhores Perfumes Árabes Femininos"
-              subtitle="As fragrâncias femininas mais doces, cremosas, florais e sensuais da perfumaria árabe."
+              subtitle="As fragrâncias femininas mais doces, cremosas, florais e sensuais da perfumaria árabe. Frascos 100% lacrados."
               products={femininos}
               onOpenModal={(prod) => setActiveModalProduct(prod)}
+              onToggleQuote={handleToggleQuote}
+              isItemInQuote={isItemInQuote}
+              onShare={handleShare}
             />
           </>
         )}
@@ -238,12 +366,54 @@ function App() {
       {/* Footer */}
       <Footer onSelectCategory={handleSelectCategory} />
 
+      {/* Floating Quote Bag Button (Sticky at bottom right) */}
+      <button
+        onClick={() => setIsQuoteDrawerOpen(true)}
+        className={`floating-quote-fab ${quoteItems.length > 0 ? 'has-items' : ''}`}
+        aria-label="Abrir sacola de cotação"
+        title="Minha Cotação"
+      >
+        <ShoppingBag size={22} />
+        {quoteItems.length > 0 && (
+          <span className="floating-quote-badge">{quoteItems.length}</span>
+        )}
+      </button>
+
       {/* Interactive Detail Modal */}
       {activeModalProduct && (
         <ProductModal
           product={activeModalProduct}
           onClose={() => setActiveModalProduct(null)}
+          onToggleQuote={handleToggleQuote}
+          isInQuote={isItemInQuote(activeModalProduct.id)}
+          onShare={handleShare}
         />
+      )}
+
+      {/* Interactive Quote Drawer */}
+      <QuoteDrawer
+        isOpen={isQuoteDrawerOpen}
+        onClose={() => setIsQuoteDrawerOpen(false)}
+        items={quoteItems}
+        onRemoveItem={handleRemoveQuoteItem}
+        onClearAll={handleClearQuote}
+      />
+
+      {/* Fragrance Discovery Quiz Modal */}
+      <FragranceQuizModal
+        isOpen={isQuizOpen}
+        onClose={() => setIsQuizOpen(false)}
+        onOpenProductModal={(product) => setActiveModalProduct(product)}
+        onAddToQuote={handleToggleQuote}
+        isItemInQuote={isItemInQuote}
+      />
+
+      {/* Global Toast Notification */}
+      {toastMessage && (
+        <div className="global-toast-notification">
+          <CheckCircle size={17} className="text-emerald" />
+          <span>{toastMessage}</span>
+        </div>
       )}
     </div>
   );

@@ -1,8 +1,8 @@
+import React, { useEffect } from 'react';
 import { brand } from '../config/brand';
-import { X, MessageCircle, Sparkles, Clock, Compass, Layers, ShieldCheck, Crown, Flower2 } from 'lucide-react';
-import { useEffect } from 'react';
+import { X, MessageCircle, Share2, Plus, Check, ShieldCheck, Sparkles } from 'lucide-react';
 
-export default function ProductModal({ product, onClose }) {
+export default function ProductModal({ product, onClose, onToggleQuote, isInQuote, onShare }) {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
@@ -17,7 +17,8 @@ export default function ProductModal({ product, onClose }) {
 
   if (!product) return null;
 
-  const whatsappMessage = `Olá! Gostaria de consultar o valor e a disponibilidade do perfume ${product.name} (${product.brand} - ${product.volume}) na SHEEPO®.`;
+  const imageUrl = `${window.location.origin}${product.image}`;
+  const whatsappMessage = `Olá! Gostaria de consultar o valor e a disponibilidade do perfume ${product.name} (${product.brand} - ${product.volume} - Frasco Lacrado) na SHEEPO®.\n\n${imageUrl}`;
   const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
@@ -35,14 +36,33 @@ export default function ProductModal({ product, onClose }) {
               alt={product.name}
               className="modal-img"
             />
+            <div className="modal-img-badge">
+              <ShieldCheck size={14} className="text-emerald" />
+              <span>100% Original Lacrado</span>
+            </div>
           </div>
 
           {/* Body */}
           <div className="modal-body">
             <div>
-              <span className="modal-eyebrow">
-                {product.gender === 'masculino' ? '👑 Top 10 Masculino' : '🌸 Top 10 Feminino'} • {product.brand} • {product.volume}
-              </span>
+              <div className="modal-top-row">
+                <span className="modal-eyebrow">
+                  {product.gender === 'masculino' ? '👑 Top 10 Masculino' : '🌸 Top 10 Feminino'} • {product.brand} • {product.volume}
+                </span>
+                
+                {onShare && (
+                  <button
+                    onClick={() => onShare(product)}
+                    className="modal-share-btn"
+                    title="Compartilhar este perfume"
+                    aria-label="Compartilhar perfume"
+                  >
+                    <Share2 size={16} />
+                    <span>Compartilhar</span>
+                  </button>
+                )}
+              </div>
+
               <h2 className="modal-title">{product.name}</h2>
               <p className="modal-desc" style={{ marginTop: '0.5rem' }}>
                 {product.description}
@@ -88,16 +108,28 @@ export default function ProductModal({ product, onClose }) {
               </div>
             )}
 
-            {/* CTA */}
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-whatsapp-modal"
-            >
-              <MessageCircle size={19} />
-              <span>Consultar Valor no WhatsApp</span>
-            </a>
+            {/* CTAs */}
+            <div className="modal-actions-wrap">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-whatsapp-modal"
+              >
+                <MessageCircle size={19} />
+                <span>Consultar no WhatsApp</span>
+              </a>
+
+              {onToggleQuote && (
+                <button
+                  onClick={() => onToggleQuote(product)}
+                  className={`btn-modal-quote ${isInQuote ? 'active' : ''}`}
+                >
+                  {isInQuote ? <Check size={18} /> : <Plus size={18} />}
+                  <span>{isInQuote ? 'Na Lista de Cotação' : 'Adicionar à Cotação'}</span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
