@@ -15,7 +15,7 @@ export default function TrustSection() {
     {
       icon: Droplet,
       title: "Decants (Don't Buy Blind)",
-      desc: "Frascos esterilizados de 5ml e 10ml com atomizadores de precisão para você testar na sua pele com economia."
+      desc: "Frascos esterilizados e fracionados com atomizadores de precisão para você testar na sua pele com economia."
     },
     {
       icon: Globe,

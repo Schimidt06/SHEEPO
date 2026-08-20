@@ -42,6 +42,9 @@ export default function Footer({ onSelectCategory }) {
               <a href="#encomendas" className="footer-link">
                 Importados Sob Encomenda
               </a>
+              <a href="#novidades" className="footer-link">
+                Em Breve: Muitas Novidades
+              </a>
             </div>
           </div>
 

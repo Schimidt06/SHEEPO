@@ -1,10 +1,10 @@
 import { brand } from '../config/brand';
 import { decantsInfo } from '../data/products';
-import { Droplets, Sparkles, CheckCircle2, MessageCircle, ArrowRight } from 'lucide-react';
+import { Droplets, CheckCircle2, MessageCircle } from 'lucide-react';
 
 export default function DecantsSection() {
   const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(
-    'Olá! Gostaria de consultar os DECANTS disponíveis e valores de kits na SHEEPO®.'
+    'Olá! Gostaria de consultar os DECANTS disponíveis e valores de kits fracionados na SHEEPO®.'
   )}`;
 
   return (
@@ -15,7 +15,7 @@ export default function DecantsSection() {
             <div>
               <div className="section-eyebrow" style={{ color: 'var(--accent-gold)' }}>
                 <Droplets size={16} />
-                <span>EXPERIÊNCIA OLFATIVA • 5ML & 10ML</span>
+                <span>EXPERIÊNCIA OLFATIVA • FRACIONADOS ORIGINAIS</span>
               </div>
 
               <h2 className="section-title" style={{ marginTop: '0.5rem', fontSize: 'clamp(2.2rem, 5vw, 3.5rem)' }}>
@@ -42,11 +42,11 @@ export default function DecantsSection() {
                       padding: '0.8rem 1.2rem'
                     }}
                   >
-                    <span className="font-mono" style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>
-                      Frasco {item.size}
+                    <span className="font-mono" style={{ fontSize: '0.95rem', fontWeight: 700, color: '#ffffff' }}>
+                      {item.size}
                     </span>
                     <p style={{ fontSize: '0.72rem', color: 'var(--accent-gold-light)', marginTop: '0.15rem' }}>
-                      {item.sprays}
+                      {item.ideal}
                     </p>
                   </div>
                 ))}

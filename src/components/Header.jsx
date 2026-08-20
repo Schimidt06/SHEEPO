@@ -20,6 +20,7 @@ export default function Header({ activeCategory, onSelectCategory }) {
           <span>✦ DEMAIS REGIÕES: CONSULTAR FRETE NO WHATSAPP</span>
           <span>✦ 100% PERFUMES ORIGINAIS LACRADOS</span>
           <span>✦ DECANTS OFICIAIS (DON'T BUY BLIND)</span>
+          <span>✦ EM BREVE: MUITAS NOVIDADES</span>
           <span>✦ DROPS & PERFUMARIA DE LUXO SHEEPO®</span>
         </div>
       </div>
@@ -65,7 +66,10 @@ export default function Header({ activeCategory, onSelectCategory }) {
               Decants
             </a>
             <a href="#encomendas" className="nav-link-btn">
-              Importados & Encomendas
+              Encomendas
+            </a>
+            <a href="#novidades" className="nav-link-btn">
+              Novidades
             </a>
           </nav>
 

@@ -1,4 +1,4 @@
-import { Sparkles, ShieldCheck, Truck, Droplet, MessageCircle, Globe } from 'lucide-react';
+import { Sparkles, ShieldCheck, Truck, Droplet, Globe } from 'lucide-react';
 import { brand } from '../config/brand';
 
 export default function Hero({ onSelectCategory }) {
@@ -48,7 +48,7 @@ export default function Hero({ onSelectCategory }) {
               <Droplet size={20} />
             </div>
             <div className="stat-card-title">Decants Oficiais</div>
-            <div className="stat-card-desc">Don't Buy Blind (5ml/10ml)</div>
+            <div className="stat-card-desc">Don't Buy Blind (Fracionados)</div>
           </div>
 
           <div className="stat-card">

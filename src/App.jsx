@@ -8,7 +8,7 @@ import ProductModal from './components/ProductModal';
 import CustomOrderBanner from './components/CustomOrderBanner';
 import DecantsSection from './components/DecantsSection';
 import TrustSection from './components/TrustSection';
-import GoodsSection from './components/GoodsSection';
+import UpcomingSection from './components/UpcomingSection';
 import Footer from './components/Footer';
 import { Search, Sparkles, PackageOpen, Crown, Flower2 } from 'lucide-react';
 
@@ -49,16 +49,12 @@ function App() {
       document.getElementById('decants')?.scrollIntoView({ behavior: 'smooth' });
       return;
     }
-    if (catId === 'importados') {
-      document.getElementById('encomendas')?.scrollIntoView({ behavior: 'smooth' });
-      return;
-    }
-    if (catId === 'goods') {
-      document.getElementById('goods')?.scrollIntoView({ behavior: 'smooth' });
+    if (catId === 'novidades') {
+      document.getElementById('novidades')?.scrollIntoView({ behavior: 'smooth' });
       return;
     }
     setSelectedCategory(catId);
-    setSearchQuery(''); // clear search when switching main categories
+    setSearchQuery('');
     const catalogEl = document.getElementById('catalogo');
     if (catalogEl) {
       catalogEl.scrollIntoView({ behavior: 'smooth' });
@@ -206,7 +202,7 @@ function App() {
             onOpenModal={(prod) => setActiveModalProduct(prod)}
           />
         ) : (
-          /* "All" Category View: Clean Organised Carousels for both Top 10 Collections! */
+          /* "All" Category View: Clean Organised Carousels for both Top 10 Collections */
           <>
             <ProductCarousel
               sectionId="masculinos"
@@ -239,8 +235,8 @@ function App() {
         {/* Trust & Quality Pillars */}
         <TrustSection />
 
-        {/* Goods & Upcoming Drops Teaser */}
-        <GoodsSection />
+        {/* Section: Em Breve Muitas Novidades */}
+        <UpcomingSection />
       </main>
 
       {/* Footer */}

@@ -9,8 +9,7 @@ export const categories = [
   { id: "top-masculino", label: "Top 10 Masculinos", icon: "Crown", count: 10 },
   { id: "top-feminino", label: "Top 10 Femininos", icon: "Flower2", count: 10 },
   { id: "decants", label: "Decants (Don't Buy Blind)", icon: "Droplets" },
-  { id: "importados", label: "Importados Sob Encomenda", icon: "Globe", badge: "Global" },
-  { id: "goods", label: "Eletrônicos & Goods", icon: "Watch", badge: "Em Breve" }
+  { id: "novidades", label: "Em Breve: Novidades", icon: "Sparkles", badge: "Novidades" }
 ];
 
 export const products = [
@@ -526,10 +525,10 @@ export const products = [
 export const decantsInfo = {
   title: "DON'T BUY BLIND.",
   subtitle: "Experimente na sua própria pele antes de investir no frasco cheio.",
-  description: "O Decant é a fração original do perfume transferida para um frasco menor esterilizado (5ml ou 10ml) com borrifador de alta precisão. Permite avaliar a evolução olfativa, projeção e fixação na sua pele com total economia e inteligência.",
+  description: "O Decant é a fração original do perfume transferida para um frasco menor esterilizado com borrifador de alta precisão. Permite avaliar a evolução olfativa, projeção e fixação na sua pele com total economia e inteligência.",
   sizes: [
-    { size: "5ml", sprays: "Aprox. 75 borrifadas", ideal: "Ideal para testar na pele e levar no dia a dia" },
-    { size: "10ml", sprays: "Aprox. 150 borrifadas", ideal: "Ideal para usar por semanas e em viagens" }
+    { size: "Frasco Pocket", sprays: "Diversas borrifadas", ideal: "Ideal para testar na pele e levar no dia a dia" },
+    { size: "Frasco Travel", sprays: "Uso prolongado", ideal: "Ideal para usar por semanas e em viagens" }
   ],
   benefits: [
     { title: "100% Autêntico", desc: "Extraído diretamente dos frascos originais e lacrados" },
@@ -538,3 +537,30 @@ export const decantsInfo = {
     { title: "Zero Arrependimento", desc: "Teste no calor, frio e noites antes do frasco fechado" }
   ]
 };
+
+export const upcomingDrops = [
+  {
+    id: "importados",
+    title: "Perfumes Importados de Grife",
+    desc: "Grandes casas de nicho e designers mundiais como Creed, Tom Ford, Dior, Chanel e Parfums de Marly.",
+    tag: "Em Breve"
+  },
+  {
+    id: "relogios",
+    title: "Relógios & Smartwatches",
+    desc: "Modelos selecionados com design contemporâneo, materiais nobres e presença marcante.",
+    tag: "Em Breve"
+  },
+  {
+    id: "eletronicos",
+    title: "Eletrônicos & Áudio Premium",
+    desc: "Fones de ouvido bluetooth de alta fidelidade sonora e tecnologia para o seu lifestyle.",
+    tag: "Em Breve"
+  },
+  {
+    id: "acessorios",
+    title: "Óculos & Acessórios Exclusivos",
+    desc: "Peças urbanas com identidade visual refinada para complementar sua presença.",
+    tag: "Em Breve"
+  }
+];
