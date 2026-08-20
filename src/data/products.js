@@ -1,15 +1,15 @@
 // ─── CATÁLOGO OFICIAL SHEEPO® ───────────────────────────────────────────────
 //
-// 100% Focado em Perfumaria:
+// 100% Focado em Perfumaria Lacrada:
 // Top 10 Melhores Perfumes Árabes Masculinos, Top 10 Femininos,
-// Decants Oficiais e Encomendas de Qualquer Perfume Importado do Mundo.
+// e Encomendas de Qualquer Perfume Importado do Mundo.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const categories = [
   { id: "all", label: "Todos os Perfumes", icon: "Sparkles" },
   { id: "top-masculino", label: "Top 10 Masculinos", icon: "Crown", count: 10 },
   { id: "top-feminino", label: "Top 10 Femininos", icon: "Flower2", count: 10 },
-  { id: "decants", label: "Decants (Don't Buy Blind)", icon: "Droplets" },
+  { id: "encomendas", label: "Importados Sob Encomenda", icon: "Globe", badge: "Global" },
   { id: "novidades", label: "Próximos Lançamentos", icon: "Sparkles", badge: "Novidades" }
 ];
 
@@ -523,45 +523,29 @@ export const products = [
   }
 ];
 
-export const decantsInfo = {
-  title: "DON'T BUY BLIND.",
-  subtitle: "Experimente na sua própria pele antes de investir no frasco cheio.",
-  description: "O Decant é a fração original do perfume transferida para um frasco menor esterilizado com borrifador de alta precisão. Permite avaliar a evolução olfativa, projeção e fixação na sua pele com total economia e inteligência.",
-  sizes: [
-    { size: "Frasco Pocket", sprays: "Diversas borrifadas", ideal: "Ideal para testar na pele e levar no dia a dia" },
-    { size: "Frasco Travel", sprays: "Uso prolongado", ideal: "Ideal para usar por semanas e em viagens" }
-  ],
-  benefits: [
-    { title: "100% Autêntico", desc: "Extraído diretamente dos frascos originais e lacrados" },
-    { title: "Atomizador Premium", desc: "Válvula de alta dispersão igual aos frascos de luxo" },
-    { title: "Economia Inteligente", desc: "Monte sua coleção diversificada gastando uma fração" },
-    { title: "Zero Arrependimento", desc: "Teste no calor, frio e noites antes do frasco fechado" }
-  ]
-};
-
 export const upcomingDrops = [
   {
     id: "importados-nicho",
     title: "Perfumaria de Nicho Internacional",
-    desc: "Casas mundiais como Creed, Parfums de Marly, Tom Ford, Xerjoff, Amouage e Nishane.",
+    desc: "Casas mundiais consagradas como Creed, Parfums de Marly, Tom Ford, Xerjoff, Amouage e Nishane.",
     tag: "Em Breve"
   },
   {
     id: "arabes-novos",
     title: "Novos Lançamentos Árabes",
-    desc: "As mais recentes novidades e frascos virais da Lattafa, Afnan, Armaf e Al Haramain.",
+    desc: "As mais recentes novidades virais e frascos lacrados da Lattafa, Afnan, Armaf e Al Haramain.",
     tag: "Em Breve"
   },
   {
-    id: "kits-decants",
-    title: "Kits de Decants Temáticos",
-    desc: "Seleções especiais de fracionados para você experimentar os melhores da perfumaria.",
+    id: "designers-famosos",
+    title: "Designers Globais Importados",
+    desc: "Frascos originais e lacrados de grifes consagradas como Dior, Chanel, Yves Saint Laurent e Jean Paul Gaultier.",
     tag: "Em Breve"
   },
   {
     id: "extrait-parfum",
-    title: "Extrait de Parfum & Concentrações Puras",
-    desc: "Fragrâncias com concentrações nobres e fixação eterna para colecionadores.",
+    title: "Extrait de Parfum & Edições de Luxo",
+    desc: "Concentrações puras e frascos de colecionador com fixação extrema.",
     tag: "Em Breve"
   }
 ];

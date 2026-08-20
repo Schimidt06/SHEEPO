@@ -6,7 +6,6 @@ import ProductCard from './components/ProductCard';
 import ProductCarousel from './components/ProductCarousel';
 import ProductModal from './components/ProductModal';
 import CustomOrderBanner from './components/CustomOrderBanner';
-import DecantsSection from './components/DecantsSection';
 import TrustSection from './components/TrustSection';
 import UpcomingSection from './components/UpcomingSection';
 import Footer from './components/Footer';
@@ -45,8 +44,8 @@ function App() {
   }, [searchQuery]);
 
   const handleSelectCategory = (catId) => {
-    if (catId === 'decants') {
-      document.getElementById('decants')?.scrollIntoView({ behavior: 'smooth' });
+    if (catId === 'encomendas') {
+      document.getElementById('encomendas')?.scrollIntoView({ behavior: 'smooth' });
       return;
     }
     if (catId === 'novidades') {
@@ -228,9 +227,6 @@ function App() {
 
         {/* Custom Global Orders Banner (Todos os perfumes do mundo) */}
         <CustomOrderBanner />
-
-        {/* Decants Experience Section */}
-        <DecantsSection />
 
         {/* Trust & Quality Pillars */}
         <TrustSection />

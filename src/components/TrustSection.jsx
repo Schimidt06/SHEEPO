@@ -1,4 +1,4 @@
-import { ShieldCheck, Truck, Droplet, Globe } from 'lucide-react';
+import { ShieldCheck, Truck, CheckCircle2, Globe } from 'lucide-react';
 
 export default function TrustSection() {
   const pillars = [
@@ -13,9 +13,9 @@ export default function TrustSection() {
       desc: "Entrega expressa gratuita para toda a cidade de Jaú. Demais regiões do Brasil com frete calculado direto no WhatsApp."
     },
     {
-      icon: Droplet,
-      title: "Decants (Don't Buy Blind)",
-      desc: "Frascos esterilizados e fracionados com atomizadores de precisão para você testar na sua pele com economia."
+      icon: CheckCircle2,
+      title: "Frascos Lacrados na Caixa",
+      desc: "Trabalhamos exclusivamente com perfumes cheios, lacrados e novos na caixa original de fábrica."
     },
     {
       icon: Globe,

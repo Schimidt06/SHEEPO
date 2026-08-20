@@ -1,4 +1,4 @@
-import { Sparkles, ShieldCheck, Truck, Droplet, Globe } from 'lucide-react';
+import { Sparkles, ShieldCheck, Truck, Sparkle, Globe, CheckCircle2 } from 'lucide-react';
 import { brand } from '../config/brand';
 
 export default function Hero({ onSelectCategory }) {
@@ -22,7 +22,7 @@ export default function Hero({ onSelectCategory }) {
         </h1>
 
         <p className="hero-subtitle">
-          Os 10 melhores masculinos e os 10 melhores femininos à pronta-entrega. <strong>Frete grátis para Jaú/SP</strong> e envio para todo o Brasil. Trabalhamos com <strong>todos os perfumes árabes e importados do mundo</strong> sob encomenda.
+          Os 10 melhores masculinos e os 10 melhores femininos à pronta-entrega. Frascos novos e 100% lacrados. <strong>Frete grátis para Jaú/SP</strong> e envio para todo o Brasil. Trabalhamos com <strong>todos os perfumes árabes e importados do mundo</strong> sob encomenda.
         </p>
 
         {/* Value Props / Stats */}
@@ -45,10 +45,10 @@ export default function Hero({ onSelectCategory }) {
 
           <div className="stat-card">
             <div className="stat-card-icon">
-              <Droplet size={20} />
+              <CheckCircle2 size={20} />
             </div>
-            <div className="stat-card-title">Decants Oficiais</div>
-            <div className="stat-card-desc">Don't Buy Blind (Fracionados)</div>
+            <div className="stat-card-title">Frascos Lacrados</div>
+            <div className="stat-card-desc">Procedência garantida</div>
           </div>
 
           <div className="stat-card">

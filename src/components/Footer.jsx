@@ -22,7 +22,7 @@ export default function Footer({ onSelectCategory }) {
               </div>
             </div>
             <p className="footer-brand-desc">
-              Vitrine oficial de fragrâncias árabes autênticas, decants exclusivos e curadoria internacional de perfumes importados.
+              Vitrine oficial de fragrâncias árabes autênticas e curadoria internacional de perfumes importados lacrados.
             </p>
           </div>
 
@@ -35,9 +35,6 @@ export default function Footer({ onSelectCategory }) {
               </a>
               <a href="#catalogo" onClick={() => onSelectCategory('top-feminino')} className="footer-link">
                 Top 10 Perfumes Femininos
-              </a>
-              <a href="#decants" className="footer-link">
-                Decants Oficiais (Don't Buy Blind)
               </a>
               <a href="#encomendas" className="footer-link">
                 Importados Sob Encomenda
@@ -80,7 +77,7 @@ export default function Footer({ onSelectCategory }) {
             © {new Date().getFullYear()} SHEEPO® — Todos os direitos reservados.
           </span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
-            <ShieldCheck size={15} color="var(--accent-gold)" /> Curadoria 100% Original & Autêntica
+            <ShieldCheck size={15} color="var(--accent-gold)" /> Curadoria 100% Original & Frascos Lacrados
           </span>
         </div>
       </div>
