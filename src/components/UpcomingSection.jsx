@@ -1,17 +1,17 @@
 import { brand } from '../config/brand';
 import { upcomingDrops } from '../data/products';
-import { Sparkles, Bell, MessageCircle, Watch, Headphones, Glasses, Globe, ArrowRight } from 'lucide-react';
+import { Sparkles, Bell, Globe, Droplets, Crown, Flame } from 'lucide-react';
 
 export default function UpcomingSection() {
   const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(
-    'Olá! Gostaria de entrar na lista VIP para ser avisado sobre as novidades e próximos lançamentos da SHEEPO®.'
+    'Olá! Gostaria de entrar na lista VIP para ser avisado sobre os próximos lançamentos de perfumes na SHEEPO®.'
   )}`;
 
   const iconMap = {
-    importados: Globe,
-    relogios: Watch,
-    eletronicos: Headphones,
-    acessorios: Glasses
+    'importados-nicho': Globe,
+    'arabes-novos': Sparkles,
+    'kits-decants': Droplets,
+    'extrait-parfum': Crown
   };
 
   return (
@@ -19,7 +19,7 @@ export default function UpcomingSection() {
       <div className="container">
         <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 3rem' }}>
           <span className="hero-badge" style={{ marginBottom: '1rem' }}>
-            <Sparkles size={12} /> PRÓXIMOS DROPS • EXPANSÃO SHEEPO®
+            <Sparkles size={12} /> PRÓXIMOS LANÇAMENTOS • PERFUMARIA EXCLUSIVA
           </span>
 
           <h2 className="section-title" style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3rem)' }}>
@@ -27,7 +27,7 @@ export default function UpcomingSection() {
           </h2>
 
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, marginTop: '0.75rem' }}>
-            Estamos preparando novidades que vão além da perfumaria árabe. Fique por dentro dos próximos lançamentos exclusivos que estão chegando à nossa vitrine:
+            Estamos preparando a chegada de novos lotes de perfumaria de nicho, lançamentos árabes e kits exclusivos para nossa vitrine:
           </p>
         </div>
 
@@ -89,10 +89,10 @@ export default function UpcomingSection() {
           boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4)'
         }}>
           <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-            Quer receber os lançamentos em primeira mão?
+            Quer receber os novos frascos em primeira mão?
           </h4>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.86rem', marginTop: '0.4rem', maxWidth: '540px', margin: '0.4rem auto 1.5rem' }}>
-            Entre na nossa lista VIP de avisos no WhatsApp e tenha prioridade e condições especiais assim que os novos lotes chegarem.
+            Entre na nossa lista VIP de avisos no WhatsApp e tenha prioridade de escolha e condições exclusivas nos próximos lotes de perfumes.
           </p>
 
           <a
@@ -103,7 +103,7 @@ export default function UpcomingSection() {
             style={{ display: 'inline-flex', width: 'auto', padding: '0.85rem 2rem', fontSize: '0.82rem' }}
           >
             <Bell size={17} />
-            <span>Entrar na Lista VIP de Novidades</span>
+            <span>Entrar na Lista VIP de Perfumes</span>
           </a>
         </div>
       </div>

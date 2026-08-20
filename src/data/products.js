@@ -1,7 +1,8 @@
 // ─── CATÁLOGO OFICIAL SHEEPO® ───────────────────────────────────────────────
 //
-// Curadoria dos 10 Melhores Perfumes Árabes Masculinos e 10 Melhores Femininos,
-// Decants Oficiais e Encomendas Especiais de Perfumes Importados do Mundo Todo.
+// 100% Focado em Perfumaria:
+// Top 10 Melhores Perfumes Árabes Masculinos, Top 10 Femininos,
+// Decants Oficiais e Encomendas de Qualquer Perfume Importado do Mundo.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const categories = [
@@ -9,7 +10,7 @@ export const categories = [
   { id: "top-masculino", label: "Top 10 Masculinos", icon: "Crown", count: 10 },
   { id: "top-feminino", label: "Top 10 Femininos", icon: "Flower2", count: 10 },
   { id: "decants", label: "Decants (Don't Buy Blind)", icon: "Droplets" },
-  { id: "novidades", label: "Em Breve: Novidades", icon: "Sparkles", badge: "Novidades" }
+  { id: "novidades", label: "Próximos Lançamentos", icon: "Sparkles", badge: "Novidades" }
 ];
 
 export const products = [
@@ -540,27 +541,27 @@ export const decantsInfo = {
 
 export const upcomingDrops = [
   {
-    id: "importados",
-    title: "Perfumes Importados de Grife",
-    desc: "Grandes casas de nicho e designers mundiais como Creed, Tom Ford, Dior, Chanel e Parfums de Marly.",
+    id: "importados-nicho",
+    title: "Perfumaria de Nicho Internacional",
+    desc: "Casas mundiais como Creed, Parfums de Marly, Tom Ford, Xerjoff, Amouage e Nishane.",
     tag: "Em Breve"
   },
   {
-    id: "relogios",
-    title: "Relógios & Smartwatches",
-    desc: "Modelos selecionados com design contemporâneo, materiais nobres e presença marcante.",
+    id: "arabes-novos",
+    title: "Novos Lançamentos Árabes",
+    desc: "As mais recentes novidades e frascos virais da Lattafa, Afnan, Armaf e Al Haramain.",
     tag: "Em Breve"
   },
   {
-    id: "eletronicos",
-    title: "Eletrônicos & Áudio Premium",
-    desc: "Fones de ouvido bluetooth de alta fidelidade sonora e tecnologia para o seu lifestyle.",
+    id: "kits-decants",
+    title: "Kits de Decants Temáticos",
+    desc: "Seleções especiais de fracionados para você experimentar os melhores da perfumaria.",
     tag: "Em Breve"
   },
   {
-    id: "acessorios",
-    title: "Óculos & Acessórios Exclusivos",
-    desc: "Peças urbanas com identidade visual refinada para complementar sua presença.",
+    id: "extrait-parfum",
+    title: "Extrait de Parfum & Concentrações Puras",
+    desc: "Fragrâncias com concentrações nobres e fixação eterna para colecionadores.",
     tag: "Em Breve"
   }
 ];
