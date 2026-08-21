@@ -1,11 +1,6 @@
-import { Sparkles, ShieldCheck, Truck, Sparkle, Globe, CheckCircle2 } from 'lucide-react';
-import { brand } from '../config/brand';
+import { Sparkles, ShieldCheck, Truck, Globe, CheckCircle2 } from 'lucide-react';
 
-export default function Hero({ onSelectCategory }) {
-  const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(
-    'Olá! Gostaria de consultar um perfume com a SHEEPO®.'
-  )}`;
-
+export default function Hero() {
   return (
     <section className="hero-section">
       <div className="hero-glow"></div>

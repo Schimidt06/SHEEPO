@@ -1,6 +1,6 @@
 import React from 'react';
 import { brand } from '../config/brand';
-import { X, Trash2, MessageCircle, ShoppingBag, ArrowRight, ShieldCheck } from 'lucide-react';
+import { X, Trash2, MessageCircle, ShoppingBag, ShieldCheck } from 'lucide-react';
 
 export default function QuoteDrawer({ isOpen, onClose, items, onRemoveItem, onClearAll }) {
   if (!isOpen) return null;
@@ -35,8 +35,8 @@ export default function QuoteDrawer({ isOpen, onClose, items, onRemoveItem, onCl
               </span>
             </div>
           </div>
-          <button className="modal-close-btn" onClick={onClose} aria-label="Fechar sacola">
-            <X size={20} />
+          <button className="modal-close-btn" style={{ position: 'static' }} onClick={onClose} aria-label="Fechar sacola">
+            <X size={18} />
           </button>
         </div>
 
@@ -86,7 +86,7 @@ export default function QuoteDrawer({ isOpen, onClose, items, onRemoveItem, onCl
                 Limpar Lista
               </button>
               <button onClick={handleSendWhatsApp} className="btn-whatsapp-quote">
-                <MessageCircle size={20} />
+                <MessageCircle size={18} />
                 <span>Consultar {items.length} {items.length === 1 ? 'Item' : 'Itens'} no WhatsApp</span>
               </button>
             </div>

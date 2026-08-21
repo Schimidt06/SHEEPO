@@ -11,7 +11,7 @@ import UpcomingSection from './components/UpcomingSection';
 import Footer from './components/Footer';
 import QuoteDrawer from './components/QuoteDrawer';
 import FragranceQuizModal from './components/FragranceQuizModal';
-import { Search, Sparkles, PackageOpen, Crown, Flower2, ShoppingBag, CheckCircle, Share2, Sparkle } from 'lucide-react';
+import { Search, Sparkles, PackageOpen, Crown, Flower2, ShoppingBag, CheckCircle } from 'lucide-react';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('all');

@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
-import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function ProductCarousel({ 
   title, 
@@ -45,15 +45,14 @@ export default function ProductCarousel({
 
   const scroll = (direction) => {
     if (!carouselRef.current) return;
-    const cardWidth = carouselRef.current.querySelector('.product-card')?.offsetWidth || 300;
-    const scrollAmount = direction === 'left' ? -(cardWidth + 20) * 1.5 : (cardWidth + 20) * 1.5;
+    const cardWidth = carouselRef.current.querySelector('.product-card')?.offsetWidth || 280;
+    const scrollAmount = direction === 'left' ? -(cardWidth + 18) * 1.5 : (cardWidth + 18) * 1.5;
     carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   };
 
   // Mouse Drag to Scroll for Desktop and Laptop users
   const handleMouseDown = (e) => {
     if (!carouselRef.current) return;
-    // Don't drag if clicking buttons or links
     if (e.target.closest('button') || e.target.closest('a')) return;
     setIsDragging(true);
     setStartX(e.pageX - carouselRef.current.offsetLeft);
@@ -89,7 +88,7 @@ export default function ProductCarousel({
                 {Icon && <Icon size={14} />} {eyebrow}
               </span>
             )}
-            <h2 className="section-title" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.35rem)' }}>
+            <h2 className="section-title">
               {title}
             </h2>
             {subtitle && (
@@ -99,7 +98,7 @@ export default function ProductCarousel({
             )}
           </div>
 
-          {/* Desktop & Tablet Navigation Controls */}
+          {/* Desktop Navigation Controls */}
           <div className="carousel-controls">
             <button
               onClick={() => scroll('left')}
@@ -122,7 +121,7 @@ export default function ProductCarousel({
           </div>
         </div>
 
-        {/* Carousel Track Container (min-width: 0 prevents flex/grid breakout) */}
+        {/* Carousel Track Container */}
         <div className="carousel-track-wrapper">
           <div
             ref={carouselRef}
@@ -158,7 +157,7 @@ export default function ProductCarousel({
           </div>
         </div>
 
-        {/* Mobile Swipe Cue / Indicator */}
+        {/* Mobile Swipe Cue */}
         <div className="carousel-mobile-indicator">
           <span className="font-mono">
             ← Deslize para explorar todos os {products.length} perfumes →

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { brand } from '../config/brand';
-import { X, MessageCircle, Share2, Plus, Check, ShieldCheck, Sparkles } from 'lucide-react';
+import { X, MessageCircle, Share2, Plus, Check, ShieldCheck } from 'lucide-react';
 
 export default function ProductModal({ product, onClose, onToggleQuote, isInQuote, onShare }) {
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function ProductModal({ product, onClose, onToggleQuote, isInQuot
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-card" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close-btn" onClick={onClose} aria-label="Fechar modal">
-          <X size={20} />
+          <X size={18} />
         </button>
 
         <div className="modal-grid">
@@ -37,7 +37,7 @@ export default function ProductModal({ product, onClose, onToggleQuote, isInQuot
               className="modal-img"
             />
             <div className="modal-img-badge">
-              <ShieldCheck size={14} className="text-emerald" />
+              <ShieldCheck size={13} className="text-emerald" />
               <span>100% Original Lacrado</span>
             </div>
           </div>
@@ -57,14 +57,14 @@ export default function ProductModal({ product, onClose, onToggleQuote, isInQuot
                     title="Compartilhar este perfume"
                     aria-label="Compartilhar perfume"
                   >
-                    <Share2 size={16} />
+                    <Share2 size={14} />
                     <span>Compartilhar</span>
                   </button>
                 )}
               </div>
 
               <h2 className="modal-title">{product.name}</h2>
-              <p className="modal-desc" style={{ marginTop: '0.5rem' }}>
+              <p className="modal-desc" style={{ marginTop: '0.4rem' }}>
                 {product.description}
               </p>
             </div>
@@ -116,7 +116,7 @@ export default function ProductModal({ product, onClose, onToggleQuote, isInQuot
                 rel="noopener noreferrer"
                 className="btn-whatsapp-modal"
               >
-                <MessageCircle size={19} />
+                <MessageCircle size={18} />
                 <span>Consultar no WhatsApp</span>
               </a>
 
@@ -126,7 +126,7 @@ export default function ProductModal({ product, onClose, onToggleQuote, isInQuot
                   className={`btn-modal-quote ${isInQuote ? 'active' : ''}`}
                 >
                   {isInQuote ? <Check size={18} /> : <Plus size={18} />}
-                  <span>{isInQuote ? 'Na Lista de Cotação' : 'Adicionar à Cotação'}</span>
+                  <span>{isInQuote ? 'Na Cotação' : 'Adicionar à Cotação'}</span>
                 </button>
               )}
             </div>
