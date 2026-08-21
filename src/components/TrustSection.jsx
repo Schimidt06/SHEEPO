@@ -5,22 +5,22 @@ export default function TrustSection() {
     {
       icon: ShieldCheck,
       title: "100% Originais Selados",
-      desc: "Garantia absoluta de procedência internacional. Frascos novos, lacrados de fábrica e com batch code conferido."
+      desc: "Garantia absoluta de procedência internacional. Frascos novos, lacrados de fábrica e com procedência conferida."
     },
     {
       icon: Truck,
       title: "Frete Grátis para Jaú/SP",
-      desc: "Entrega expressa gratuita para toda a cidade de Jaú. Demais regiões do Brasil com frete calculado direto no WhatsApp."
+      desc: "Entrega expressa gratuita para toda a cidade de Jaú. Demais regiões do Brasil com envio seguro cotado no WhatsApp."
     },
     {
       icon: CheckCircle2,
-      title: "Frascos Lacrados na Caixa",
-      desc: "Trabalhamos exclusivamente com perfumes cheios, lacrados e novos na caixa original de fábrica."
+      title: "Edições & Apresentação",
+      desc: "Imagens meramente ilustrativas. O design da caixa e frasco pode variar conforme a edição especial, lote e volumetria (ML)."
     },
     {
       icon: Globe,
-      title: "Todos os Perfumes do Mundo",
-      desc: "Trazemos qualquer perfume árabe, de nicho ou importado tradicional sob encomenda com cotação imediata."
+      title: "Cotações no Dólar & Catálogo Global",
+      desc: "Preços calculados diariamente com base na cotação cambial do Dólar (USD). Trazemos qualquer perfume importado sob encomenda."
     }
   ];
 

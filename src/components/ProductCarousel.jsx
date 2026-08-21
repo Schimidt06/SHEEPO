@@ -45,15 +45,17 @@ export default function ProductCarousel({
 
   const scroll = (direction) => {
     if (!carouselRef.current) return;
-    const cardWidth = carouselRef.current.querySelector('.product-card')?.offsetWidth || 280;
-    const scrollAmount = direction === 'left' ? -(cardWidth + 18) * 1.5 : (cardWidth + 18) * 1.5;
+    const cardEl = carouselRef.current.querySelector('.carousel-item');
+    const cardWidth = cardEl ? cardEl.offsetWidth : 280;
+    const scrollAmount = direction === 'left' ? -(cardWidth + 16) : (cardWidth + 16);
     carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   };
 
-  // Mouse Drag to Scroll for Desktop and Laptop users
+  // Mouse Drag to Scroll for Desktop users
   const handleMouseDown = (e) => {
     if (!carouselRef.current) return;
-    if (e.target.closest('button') || e.target.closest('a')) return;
+    if (e.button !== 0) return; // only main left click
+    if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input')) return;
     setIsDragging(true);
     setStartX(e.pageX - carouselRef.current.offsetLeft);
     setScrollLeftState(carouselRef.current.scrollLeft);
@@ -71,7 +73,7 @@ export default function ProductCarousel({
     if (!isDragging || !carouselRef.current) return;
     e.preventDefault();
     const x = e.pageX - carouselRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
+    const walk = (x - startX) * 1.3;
     carouselRef.current.scrollLeft = scrollLeftState - walk;
   };
 

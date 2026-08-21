@@ -8,16 +8,16 @@ export default function Hero() {
       <div className="container hero-content">
         <div className="hero-badge">
           <Sparkles size={13} />
-          <span>TOP 10 PERFUMES ÁRABES • SELEÇÃO OFICIAL 2026</span>
+          <span>TOP 10 PERFUMES IMPORTADOS MAIS COMPRADOS DO BRASIL • SELEÇÃO 2026</span>
         </div>
 
         <h1 className="hero-title">
-          Os melhores perfumes árabes & <br />
+          Os 10 melhores perfumes importados & <br />
           <span className="hero-title-highlight">curadoria internacional.</span>
         </h1>
 
         <p className="hero-subtitle">
-          Os 10 melhores masculinos e os 10 melhores femininos à pronta-entrega. Frascos novos e 100% lacrados. <strong>Frete grátis para Jaú/SP</strong> e envio para todo o Brasil. Trabalhamos com <strong>todos os perfumes árabes e importados do mundo</strong> sob encomenda.
+          Os 10 perfumes masculinos e 10 femininos mais comprados e desejados do Brasil. Frascos novos e <strong>100% lacrados de fábrica</strong>. <strong>Frete grátis para Jaú/SP</strong> e envio para todo o Brasil. Cotações no WhatsApp e encomendas de <strong>qualquer perfume importado do mundo</strong>.
         </p>
 
         {/* Value Props / Stats */}
@@ -42,16 +42,16 @@ export default function Hero() {
             <div className="stat-card-icon">
               <CheckCircle2 size={20} />
             </div>
-            <div className="stat-card-title">Frascos Lacrados</div>
-            <div className="stat-card-desc">Procedência garantida</div>
+            <div className="stat-card-title">Edições Lacradas</div>
+            <div className="stat-card-desc">Imagens ilustrativas • Variação de ML</div>
           </div>
 
           <div className="stat-card">
             <div className="stat-card-icon">
               <Globe size={20} />
             </div>
-            <div className="stat-card-title">Todos os Perfumes</div>
-            <div className="stat-card-desc">Árabes e importados do mundo</div>
+            <div className="stat-card-title">Cotação no Dólar</div>
+            <div className="stat-card-desc">Todos os importados do mundo</div>
           </div>
         </div>
       </div>

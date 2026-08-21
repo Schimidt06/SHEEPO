@@ -28,19 +28,22 @@ export default function Footer({ onSelectCategory }) {
 
           {/* Col 2: Categorias */}
           <div>
-            <h4 className="footer-col-title">Curadoria</h4>
+            <h4 className="footer-col-title">Curadoria Oficial</h4>
             <div className="footer-links-list">
-              <a href="#catalogo" onClick={() => onSelectCategory('top-masculino')} className="footer-link">
-                Top 10 Perfumes Masculinos
+              <a href="#catalogo" onClick={() => onSelectCategory('arabes-masculino')} className="footer-link">
+                Top 10 Árabes Masculinos
               </a>
-              <a href="#catalogo" onClick={() => onSelectCategory('top-feminino')} className="footer-link">
-                Top 10 Perfumes Femininos
+              <a href="#catalogo" onClick={() => onSelectCategory('arabes-feminino')} className="footer-link">
+                Top 10 Árabes Femininos
+              </a>
+              <a href="#catalogo" onClick={() => onSelectCategory('importados-masculino')} className="footer-link">
+                Top 10 Importados Masculinos
+              </a>
+              <a href="#catalogo" onClick={() => onSelectCategory('importados-feminino')} className="footer-link">
+                Top 10 Importados Femininos
               </a>
               <a href="#encomendas" className="footer-link">
                 Importados Sob Encomenda
-              </a>
-              <a href="#novidades" className="footer-link">
-                Em Breve: Muitas Novidades
               </a>
             </div>
           </div>

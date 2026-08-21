@@ -9,16 +9,31 @@ export default function ProductCard({ product, onOpenModal, onToggleQuote, isInQ
 
   return (
     <article className="product-card">
-      {/* Top Badges */}
-      <div className="product-card__badge-top">
-        {product.curation && (
-          <span className="pill-badge pill-badge--featured">
-            {product.gender === 'masculino' ? <Crown size={10} /> : <Flower2 size={10} />} {product.curation}
+      {/* Top Header Row (Badges & Share) */}
+      <div className="product-card__header-row">
+        <div className="product-card__badge-group">
+          {product.curation && (
+            <span className="pill-badge pill-badge--featured">
+              {product.gender === 'masculino' ? <Crown size={10} /> : <Flower2 size={10} />} {product.curation}
+            </span>
+          )}
+          <span className="pill-badge pill-badge--available">
+            Frasco Lacrado
           </span>
-        )}
-        <span className="pill-badge pill-badge--available">
-          Frasco Lacrado
-        </span>
+        </div>
+
+        {/* Quick share button */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            if (onShare) onShare(product);
+          }}
+          className="btn-card-quick-share"
+          title="Compartilhar perfume"
+          aria-label="Compartilhar perfume"
+        >
+          <Share2 size={13} />
+        </button>
       </div>
 
       {/* Image container */}
@@ -33,19 +48,6 @@ export default function ProductCard({ product, onOpenModal, onToggleQuote, isInQ
           className="product-card__img"
           loading="lazy"
         />
-        
-        {/* Quick share button on top right of image */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            if (onShare) onShare(product);
-          }}
-          className="btn-card-quick-share"
-          title="Compartilhar perfume"
-          aria-label="Compartilhar perfume"
-        >
-          <Share2 size={14} />
-        </button>
       </div>
 
       {/* Content */}
@@ -62,6 +64,21 @@ export default function ProductCard({ product, onOpenModal, onToggleQuote, isInQ
         <p className="product-card__tagline">
           {product.tagline}
         </p>
+
+        {/* Blind Buy & Spray Guide Pills */}
+        <div className="product-card__meta-row">
+          {product.blindBuy && (
+            <span className={`blind-buy-pill blind-buy-pill--${product.blindBuy.level}`}>
+              <span className="blind-buy-dot" />
+              {product.blindBuy.label}
+            </span>
+          )}
+          {product.sprayGuide && (
+            <span className="spray-guide-pill" title={product.sprayGuide.tip}>
+              🧴 {product.sprayGuide.sprays}
+            </span>
+          )}
+        </div>
 
         {/* Tags */}
         <div className="product-card__tags">

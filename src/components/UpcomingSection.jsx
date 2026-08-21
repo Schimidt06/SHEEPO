@@ -1,10 +1,10 @@
 import { brand } from '../config/brand';
 import { upcomingDrops } from '../data/products';
-import { Sparkles, Bell, Globe, Droplets, Crown } from 'lucide-react';
+import { Sparkles, MessageCircle, Globe, Droplets, Crown } from 'lucide-react';
 
 export default function UpcomingSection() {
   const whatsappUrl = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(
-    'Olá! Gostaria de entrar na lista VIP para ser avisado sobre os próximos lançamentos de perfumes na SHEEPO®.'
+    'Olá! Gostaria de me informar sobre as novidades e próximos lançamentos de perfumes na SHEEPO®.'
   )}`;
 
   const iconMap = {
@@ -58,13 +58,13 @@ export default function UpcomingSection() {
           })}
         </div>
 
-        {/* VIP Access Callout */}
+        {/* Callout */}
         <div className="upcoming-vip-card">
           <h4 className="upcoming-vip-title">
-            Quer receber os novos frascos em primeira mão?
+            Quer saber quando chegarem novos frascos?
           </h4>
           <p className="upcoming-vip-desc">
-            Entre na nossa lista VIP de avisos no WhatsApp e tenha prioridade de escolha e condições exclusivas nos próximos lotes de perfumes.
+            Fale conosco no WhatsApp para consultar previsão de chegada, tirar dúvidas ou pedir para ser avisado sobre lançamentos específicos.
           </p>
 
           <a
@@ -74,8 +74,8 @@ export default function UpcomingSection() {
             className="btn-whatsapp-modal"
             style={{ display: 'inline-flex', width: 'auto', padding: '0 2rem', fontSize: '0.82rem' }}
           >
-            <Bell size={17} />
-            <span>Entrar na Lista VIP de Perfumes</span>
+            <MessageCircle size={17} />
+            <span>Consultar Novidades no WhatsApp</span>
           </a>
         </div>
       </div>

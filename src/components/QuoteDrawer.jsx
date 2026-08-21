@@ -81,6 +81,11 @@ export default function QuoteDrawer({ isOpen, onClose, items, onRemoveItem, onCl
         {/* Footer Actions */}
         {items.length > 0 && (
           <div className="quote-drawer-footer">
+            <div className="quote-disclaimer-box">
+              <p>✦ <strong>Imagens Ilustrativas:</strong> A caixa e apresentação podem variar de acordo com lote, edição e volumetria (ML).</p>
+              <p>✦ <strong>Variação do Dólar:</strong> Valores finais calculados no WhatsApp conforme a cotação cambial do dia.</p>
+            </div>
+
             <div className="quote-drawer-footer-actions">
               <button onClick={onClearAll} className="btn-clear-quote">
                 Limpar Lista

@@ -18,16 +18,30 @@ export default function Header({
       {/* Top Announcement Marquee */}
       <div className="announcement-bar">
         <div className="announcement-track">
-          <span className="badge-live">
-            <span className="pulse-dot"></span> ATENDIMENTO ONLINE VIA WHATSAPP
-          </span>
-          <span style={{ color: '#ffffff', fontWeight: 600 }}>
-            🚚 FRETE GRÁTIS PARA JAÚ/SP
-          </span>
-          <span>✦ DEMAIS REGIÕES: CONSULTAR FRETE NO WHATSAPP</span>
-          <span>✦ 100% PERFUMES ORIGINAIS LACRADOS (NÃO TRABALHAMOS COM AMOSTRAS)</span>
-          <span>✦ ENCOMENDAS DE QUALQUER PERFUME DO MUNDO</span>
-          <span>✦ EM BREVE: MUITAS NOVIDADES</span>
+          <div className="announcement-content">
+            <span className="badge-live">
+              <span className="pulse-dot"></span> ATENDIMENTO ONLINE VIA WHATSAPP
+            </span>
+            <span style={{ color: '#ffffff', fontWeight: 600 }}>
+              🚚 FRETE GRÁTIS PARA JAÚ/SP
+            </span>
+            <span>✦ 100% PERFUMES ORIGINAIS LACRADOS</span>
+            <span>✦ COTAÇÕES VARIÁVEIS CONFORME O DÓLAR (USD)</span>
+            <span>✦ IMAGENS ILUSTRATIVAS (CAIXAS PODEM VARIAR CONFORME EDIÇÃO/ML)</span>
+            <span>✦ ENCOMENDAS DE QUALQUER PERFUME IMPORTADO DO MUNDO</span>
+          </div>
+          <div className="announcement-content" aria-hidden="true">
+            <span className="badge-live">
+              <span className="pulse-dot"></span> ATENDIMENTO ONLINE VIA WHATSAPP
+            </span>
+            <span style={{ color: '#ffffff', fontWeight: 600 }}>
+              🚚 FRETE GRÁTIS PARA JAÚ/SP
+            </span>
+            <span>✦ 100% PERFUMES ORIGINAIS LACRADOS</span>
+            <span>✦ COTAÇÕES VARIÁVEIS CONFORME O DÓLAR (USD)</span>
+            <span>✦ IMAGENS ILUSTRATIVAS (CAIXAS PODEM VARIAR CONFORME EDIÇÃO/ML)</span>
+            <span>✦ ENCOMENDAS DE QUALQUER PERFUME IMPORTADO DO MUNDO</span>
+          </div>
         </div>
       </div>
 
@@ -57,22 +71,31 @@ export default function Header({
               Todos
             </button>
             <button
-              onClick={() => onSelectCategory('top-masculino')}
-              className={`nav-link-btn ${activeCategory === 'top-masculino' ? 'active' : ''}`}
+              onClick={() => onSelectCategory('arabes-masculino')}
+              className={`nav-link-btn ${activeCategory === 'arabes-masculino' ? 'active' : ''}`}
             >
-              Top 10 Masculinos
+              Árabes Masc.
             </button>
             <button
-              onClick={() => onSelectCategory('top-feminino')}
-              className={`nav-link-btn ${activeCategory === 'top-feminino' ? 'active' : ''}`}
+              onClick={() => onSelectCategory('arabes-feminino')}
+              className={`nav-link-btn ${activeCategory === 'arabes-feminino' ? 'active' : ''}`}
             >
-              Top 10 Femininos
+              Árabes Fem.
+            </button>
+            <button
+              onClick={() => onSelectCategory('importados-masculino')}
+              className={`nav-link-btn ${activeCategory === 'importados-masculino' ? 'active' : ''}`}
+            >
+              Importados Masc.
+            </button>
+            <button
+              onClick={() => onSelectCategory('importados-feminino')}
+              className={`nav-link-btn ${activeCategory === 'importados-feminino' ? 'active' : ''}`}
+            >
+              Importados Fem.
             </button>
             <a href="#encomendas" className="nav-link-btn">
               Encomendas
-            </a>
-            <a href="#novidades" className="nav-link-btn">
-              Novidades
             </a>
           </nav>
 

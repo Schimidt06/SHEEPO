@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { brand } from '../config/brand';
-import { X, MessageCircle, Share2, Plus, Check, ShieldCheck } from 'lucide-react';
+import { X, MessageCircle, Share2, Plus, Check, ShieldCheck, DollarSign, Package } from 'lucide-react';
 
 export default function ProductModal({ product, onClose, onToggleQuote, isInQuote, onShare }) {
   useEffect(() => {
@@ -99,6 +99,40 @@ export default function ProductModal({ product, onClose, onToggleQuote, isInQuot
               </div>
             </div>
 
+            {/* Termômetro de Blind Buy & Guia de Borrifadas */}
+            <div className="modal-expert-grid">
+              {/* Blind Buy Box */}
+              {product.blindBuy && (
+                <div className={`expert-card expert-card--${product.blindBuy.level}`}>
+                  <div className="expert-card-header">
+                    <span className="expert-card-title">🎯 Compra no Escuro (Blind Buy)</span>
+                    <span className={`blind-buy-badge blind-buy-badge--${product.blindBuy.level}`}>
+                      {product.blindBuy.label}
+                    </span>
+                  </div>
+                  <p className="expert-card-desc">{product.blindBuy.note}</p>
+                </div>
+              )}
+
+              {/* Guia de Borrifadas */}
+              {product.sprayGuide && (
+                <div className="expert-card expert-card--spray">
+                  <div className="expert-card-header">
+                    <span className="expert-card-title">🧴 Guia de Borrifadas & Aplicação</span>
+                    <span className="spray-guide-count-badge">
+                      {product.sprayGuide.sprays}
+                    </span>
+                  </div>
+                  <div className="expert-spray-points">
+                    <span>📍 <strong>Pontos ideais:</strong> {product.sprayGuide.points}</span>
+                  </div>
+                  <p className="expert-card-desc" style={{ marginTop: '0.35rem' }}>
+                    💡 <strong>Dica do Especialista:</strong> {product.sprayGuide.tip}
+                  </p>
+                </div>
+              )}
+            </div>
+
             {product.ocasiao && (
               <div className="perf-box">
                 <span className="perf-box-label">Ocasião Recomendada</span>
@@ -107,6 +141,18 @@ export default function ProductModal({ product, onClose, onToggleQuote, isInQuot
                 </p>
               </div>
             )}
+
+            {/* Transparency & Disclaimer Box */}
+            <div className="modal-disclaimer-card">
+              <div className="modal-disclaimer-item">
+                <Package size={14} className="text-gold" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <span><strong>Imagens Ilustrativas:</strong> A caixa e apresentação podem variar de acordo com o lote, edição e volumetria (ML). Frascos 100% originais lacrados.</span>
+              </div>
+              <div className="modal-disclaimer-item">
+                <DollarSign size={14} className="text-emerald" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <span><strong>Cotação em Dólar:</strong> Valores sujeitos a variação cambial diária conforme a cotação do Dólar (USD).</span>
+              </div>
+            </div>
 
             {/* CTAs */}
             <div className="modal-actions-wrap">

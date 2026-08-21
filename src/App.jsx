@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { products, categories } from './data/products';
+import { products, categories, occasions } from './data/products';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ProductCard from './components/ProductCard';
@@ -11,10 +11,12 @@ import UpcomingSection from './components/UpcomingSection';
 import Footer from './components/Footer';
 import QuoteDrawer from './components/QuoteDrawer';
 import FragranceQuizModal from './components/FragranceQuizModal';
-import { Search, Sparkles, PackageOpen, Crown, Flower2, ShoppingBag, CheckCircle } from 'lucide-react';
+import TransparencyBanner from './components/TransparencyBanner';
+import { Search, Sparkles, PackageOpen, Crown, Flower2, ShoppingBag, CheckCircle, X, Sun, Moon, Briefcase, Snowflake, Compass } from 'lucide-react';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedOccasion, setSelectedOccasion] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeModalProduct, setActiveModalProduct] = useState(null);
   
@@ -113,21 +115,41 @@ function App() {
     }
   };
 
-  // Masculine and Feminine separated collections (exactly 10 each)
-  const masculinos = useMemo(() => {
-    return products.filter(p => p.gender === 'masculino');
-  }, []);
+  // Products filtered by Occasion (Climate & Moment)
+  const filteredProducts = useMemo(() => {
+    if (selectedOccasion === 'all') return products;
+    const occObj = occasions.find(o => o.id === selectedOccasion);
+    if (!occObj || !occObj.keywords) return products;
 
-  const femininos = useMemo(() => {
-    return products.filter(p => p.gender === 'feminino');
-  }, []);
+    return products.filter((product) => {
+      const text = `${product.ocasiao} ${product.tagline} ${product.description} ${product.tags.join(' ')}`.toLowerCase();
+      return occObj.keywords.some((kw) => text.includes(kw));
+    });
+  }, [selectedOccasion]);
+
+  // 4 Official Collections (filtered by Occasion if active)
+  const arabesMasculinos = useMemo(() => {
+    return filteredProducts.filter(p => p.category === 'ARABE' && p.gender === 'masculino');
+  }, [filteredProducts]);
+
+  const arabesFemininos = useMemo(() => {
+    return filteredProducts.filter(p => p.category === 'ARABE' && p.gender === 'feminino');
+  }, [filteredProducts]);
+
+  const importadosMasculinos = useMemo(() => {
+    return filteredProducts.filter(p => p.category === 'IMPORTADO' && p.gender === 'masculino');
+  }, [filteredProducts]);
+
+  const importadosFemininos = useMemo(() => {
+    return filteredProducts.filter(p => p.category === 'IMPORTADO' && p.gender === 'feminino');
+  }, [filteredProducts]);
 
   // Search Results Filtering
   const searchResults = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
     if (!q) return null;
 
-    return products.filter((product) => {
+    return filteredProducts.filter((product) => {
       const matchesName = product.name.toLowerCase().includes(q);
       const matchesBrand = product.brand.toLowerCase().includes(q);
       const matchesTagline = product.tagline.toLowerCase().includes(q);
@@ -138,7 +160,7 @@ function App() {
 
       return matchesName || matchesBrand || matchesTagline || matchesTags || matchesNotes;
     });
-  }, [searchQuery]);
+  }, [searchQuery, filteredProducts]);
 
   const handleSelectCategory = (catId) => {
     if (catId === 'encomendas') {
@@ -181,8 +203,10 @@ function App() {
                 const isSelected = selectedCategory === cat.id && !searchQuery;
                 let count = 0;
                 if (cat.id === 'all') count = products.length;
-                else if (cat.id === 'top-masculino') count = masculinos.length;
-                else if (cat.id === 'top-feminino') count = femininos.length;
+                else if (cat.id === 'arabes-masculino') count = arabesMasculinos.length;
+                else if (cat.id === 'arabes-feminino') count = arabesFemininos.length;
+                else if (cat.id === 'importados-masculino') count = importadosMasculinos.length;
+                else if (cat.id === 'importados-feminino') count = importadosFemininos.length;
 
                 return (
                   <button
@@ -226,10 +250,55 @@ function App() {
                   className="search-input"
                   aria-label="Buscar perfume"
                 />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="search-clear-btn"
+                    aria-label="Limpar busca"
+                    type="button"
+                  >
+                    <X size={14} />
+                  </button>
+                )}
               </div>
             </div>
           </div>
+
+          {/* Occasion / Climate Sub-Filters Bar */}
+          <div className="container occasion-filter-container">
+            <div className="occasion-filter-bar">
+              <span className="occasion-filter-label">
+                <Compass size={13} className="text-gold" /> Clima & Momento:
+              </span>
+              <div className="occasion-tabs">
+                {occasions.map((occ) => {
+                  const isSelected = selectedOccasion === occ.id;
+                  return (
+                    <button
+                      key={occ.id}
+                      onClick={() => setSelectedOccasion(occ.id)}
+                      className={`occasion-pill-btn ${isSelected ? 'active' : ''}`}
+                    >
+                      {occ.label}
+                    </button>
+                  );
+                })}
+              </div>
+              {selectedOccasion !== 'all' && (
+                <button
+                  onClick={() => setSelectedOccasion('all')}
+                  className="occasion-reset-btn"
+                  title="Mostrar todas as ocasiões"
+                >
+                  <X size={12} /> Limpar Filtro ({filteredProducts.length})
+                </button>
+              )}
+            </div>
+          </div>
         </section>
+
+        {/* Transparency Banner: Imagens Ilustrativas / Variação Cambial Dólar */}
+        <TransparencyBanner />
 
         {/* Dynamic Display Area */}
         {searchQuery.trim() !== '' ? (
@@ -294,44 +363,72 @@ function App() {
               </div>
             )}
           </section>
-        ) : selectedCategory === 'top-masculino' ? (
-          /* Only Masculine Top 10 View */
+        ) : selectedCategory === 'arabes-masculino' ? (
+          /* 👑 Only Árabes Masculinos Top 10 */
           <ProductCarousel
-            sectionId="masculinos"
+            sectionId="arabes-masculinos"
             icon={Crown}
             eyebrow="SELEÇÃO OFICIAL 2026"
             title="Os 10 Melhores Perfumes Árabes Masculinos"
-            subtitle="As 10 fragrâncias masculinas mais elogiadas, marcantes e de alta performance à pronta-entrega. Frascos lacrados de fábrica."
-            products={masculinos}
+            subtitle="As 10 fragrâncias árabes masculinas mais elogiadas, marcantes e de alta performance à pronta-entrega. Frascos 100% lacrados de fábrica."
+            products={arabesMasculinos}
             onOpenModal={(prod) => setActiveModalProduct(prod)}
             onToggleQuote={handleToggleQuote}
             isItemInQuote={isItemInQuote}
             onShare={handleShare}
           />
-        ) : selectedCategory === 'top-feminino' ? (
-          /* Only Feminine Top 10 View */
+        ) : selectedCategory === 'arabes-feminino' ? (
+          /* 🌸 Only Árabes Femininos Top 10 */
           <ProductCarousel
-            sectionId="femininos"
+            sectionId="arabes-femininos"
             icon={Flower2}
             eyebrow="SELEÇÃO OFICIAL 2026"
             title="Os 10 Melhores Perfumes Árabes Femininos"
-            subtitle="As 10 fragrâncias femininas mais elegantes, doces, cremosas e sofisticadas da perfumaria árabe. Frascos lacrados de fábrica."
-            products={femininos}
+            subtitle="As 10 fragrâncias árabes femininas mais elegantes, doces, cremosas e sofisticadas da perfumaria oriental. Frascos 100% lacrados de fábrica."
+            products={arabesFemininos}
+            onOpenModal={(prod) => setActiveModalProduct(prod)}
+            onToggleQuote={handleToggleQuote}
+            isItemInQuote={isItemInQuote}
+            onShare={handleShare}
+          />
+        ) : selectedCategory === 'importados-masculino' ? (
+          /* 👑 Only Importados Masculinos Top 10 */
+          <ProductCarousel
+            sectionId="importados-masculinos"
+            icon={Crown}
+            eyebrow="SELEÇÃO OFICIAL 2026"
+            title="Os 10 Perfumes Importados Masculinos Mais Comprados"
+            subtitle="Os maiores sucessos mundiais da perfumaria de grife masculina: Dior Sauvage, Bleu de Chanel, Acqua di Giò, 1 Million e mais."
+            products={importadosMasculinos}
+            onOpenModal={(prod) => setActiveModalProduct(prod)}
+            onToggleQuote={handleToggleQuote}
+            isItemInQuote={isItemInQuote}
+            onShare={handleShare}
+          />
+        ) : selectedCategory === 'importados-feminino' ? (
+          /* 🌸 Only Importados Femininos Top 10 */
+          <ProductCarousel
+            sectionId="importados-femininos"
+            icon={Flower2}
+            eyebrow="SELEÇÃO OFICIAL 2026"
+            title="Os 10 Perfumes Importados Femininos Mais Comprados"
+            subtitle="Os ícones mundiais mais desejados do Brasil: Good Girl, La Vie Est Belle, J'adore, Coco Mademoiselle, 212 VIP Rosé e mais."
+            products={importadosFemininos}
             onOpenModal={(prod) => setActiveModalProduct(prod)}
             onToggleQuote={handleToggleQuote}
             isItemInQuote={isItemInQuote}
             onShare={handleShare}
           />
         ) : (
-          /* "All" Category View: Both Top 10 Collections */
+          /* "All" Category View: All 4 Top 10 Collections */
           <>
             <ProductCarousel
-              sectionId="masculinos"
+              sectionId="arabes-masculinos"
               icon={Crown}
               eyebrow="SELEÇÃO OFICIAL 2026"
               title="Os 10 Melhores Perfumes Árabes Masculinos"
-              subtitle="As fragrâncias masculinas mais elogiadas, versáteis e potentes para noites, encontros e dia a dia. Frascos 100% lacrados."
-              products={masculinos}
+              subtitle="As fragrâncias árabes masculinas mais elogiadas, versáteis e potentes para noites, encontros e dia a dia. Frascos 100% lacrados."
+              products={arabesMasculinos}
               onOpenModal={(prod) => setActiveModalProduct(prod)}
               onToggleQuote={handleToggleQuote}
               isItemInQuote={isItemInQuote}
@@ -339,12 +436,38 @@ function App() {
             />
 
             <ProductCarousel
-              sectionId="femininos"
+              sectionId="arabes-femininos"
               icon={Flower2}
               eyebrow="SELEÇÃO OFICIAL 2026"
               title="Os 10 Melhores Perfumes Árabes Femininos"
-              subtitle="As fragrâncias femininas mais doces, cremosas, florais e sensuais da perfumaria árabe. Frascos 100% lacrados."
-              products={femininos}
+              subtitle="As fragrâncias árabes femininas mais doces, cremosas, florais e sensuais da perfumaria oriental. Frascos 100% lacrados."
+              products={arabesFemininos}
+              onOpenModal={(prod) => setActiveModalProduct(prod)}
+              onToggleQuote={handleToggleQuote}
+              isItemInQuote={isItemInQuote}
+              onShare={handleShare}
+            />
+
+            <ProductCarousel
+              sectionId="importados-masculinos"
+              icon={Crown}
+              eyebrow="SELEÇÃO OFICIAL 2026"
+              title="Os 10 Perfumes Importados Masculinos Mais Comprados"
+              subtitle="Os clássicos e best-sellers mundiais de grife masculina mais vendidos no Brasil. Frascos 100% lacrados."
+              products={importadosMasculinos}
+              onOpenModal={(prod) => setActiveModalProduct(prod)}
+              onToggleQuote={handleToggleQuote}
+              isItemInQuote={isItemInQuote}
+              onShare={handleShare}
+            />
+
+            <ProductCarousel
+              sectionId="importados-femininos"
+              icon={Flower2}
+              eyebrow="SELEÇÃO OFICIAL 2026"
+              title="Os 10 Perfumes Importados Femininos Mais Comprados"
+              subtitle="Os perfumes femininos mais sofisticados, doces e celebrados do mundo. Frascos 100% lacrados."
+              products={importadosFemininos}
               onOpenModal={(prod) => setActiveModalProduct(prod)}
               onToggleQuote={handleToggleQuote}
               isItemInQuote={isItemInQuote}
